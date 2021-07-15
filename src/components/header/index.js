@@ -1,14 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './index.module.sass'
+import { startFetchingBooks, getBooks } from '../../redux/bookStore/actions'
+import { connect } from 'react-redux'
 
-function Header() {
+
+function Header(props) {
+
+    useEffect(() => {}, [props])
+
+    const [searchData, setSearchData] = useState({
+        query: null,
+        sort: null,
+        category: null,
+    })
+
+    function updateSearchData(e) {
+
+        document.getElementById('search').style = 'border: none'
+        setSearchData({
+            ...searchData,
+            [e.target.name]: e.target.value,
+        })
+
+    }
+
+    function startSearch() {
+
+        if(searchData.query) {
+            props.startLoading()
+            props.search(searchData.query)
+        } else {
+            document.getElementById('search').style = 'border: 1px solid red'
+        }
+
+    }
+
     return (
         <div className={styles.header}>
             
             <div className={styles.search}>
 
-                <input type="search" id="search" placeholder="" />
-                <button>
+                <input name="query" type="search" id="search" placeholder="" onChange={updateSearchData} />
+                <button onClick={() => startSearch()}>
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
                         xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 512.005 512.005" 
@@ -30,13 +63,13 @@ function Header() {
                 
                 <div>
                     <select id="category" name="category">
-                        <option>select category</option>
+                        <option>all</option>
                     </select>
                 </div>
 
                 <div>
                     <select id="sort" name="sort">
-                        <option>sort by</option>
+                        <option>relevance</option>
                     </select>
                 </div>
 
@@ -46,4 +79,19 @@ function Header() {
     )
 }
 
-export default Header
+function mapStateToProps(state){
+    return {
+        sort: state.booksReducer.sort,
+        category: state.booksReducer.category,
+        categories: state.booksReducer.categories,
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        startLoading: () => dispatch(startFetchingBooks()),
+        search: (query) => dispatch(getBooks(query))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
