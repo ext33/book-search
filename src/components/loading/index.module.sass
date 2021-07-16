@@ -1,0 +1,35 @@
+@mixin loading-animation($delay)
+    animation: load-dot .8s $delay ease-in-out infinite
+
+@keyframes load-dot
+    0%
+      opacity: 0
+    50%
+      opacity: 1
+    100%
+      opacity: 0
+
+    
+.loading
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 60vh
+    font-size: 32px
+
+    p
+        margin-right: 5px
+
+    span
+        margin-right: 5px
+
+    span:nth-child(2)
+        @include loading-animation(0s)
+    
+    span:nth-child(3)
+        @include loading-animation(.2s)
+
+    span:nth-child(4)
+        @include loading-animation(.4s)
+
+  

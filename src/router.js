@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import MainPage from './pages/main'
-import Page404 from './pages/404'
+import pageNotFound from './pages/pageNotFound'
 import ErrorPage from './pages/error'
 
 
@@ -21,7 +21,7 @@ function RouterView() {
             <Route
                 path='/404'
                 exact
-                component={Page404}
+                component={pageNotFound}
             />
             <Redirect
                 from='*'

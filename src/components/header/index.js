@@ -10,27 +10,30 @@ function Header(props) {
 
     const [searchData, setSearchData] = useState({
         query: null,
-        sort: null,
-        category: null,
+        sort: 'relevance',
+        category: 'all',
     })
-
+    
     function updateSearchData(e) {
 
-        document.getElementById('search').style = 'border: none'
+        document.getElementById('search').style = 'box-shadow: 0px 0px 20px 2px rgba(34, 60, 80, 0.2); border: none'
+
         setSearchData({
             ...searchData,
             [e.target.name]: e.target.value,
         })
-
+        
+        // if (e.target.name === 'sort' || e.target.name === 'category')
+            // startSearch()
     }
 
     function startSearch() {
 
         if(searchData.query) {
             props.startLoading()
-            props.search(searchData.query)
+            props.search(searchData.query, searchData.sort, searchData.category)
         } else {
-            document.getElementById('search').style = 'border: 1px solid red'
+            document.getElementById('search').style = 'box-shadow: inset 0px 0px 5px 2px rgba(226, 17, 17, 0.5); border 1px solid rgba(226, 17, 17, 0.5)'
         }
 
     }
@@ -41,7 +44,7 @@ function Header(props) {
             <div className={styles.search}>
 
                 <input name="query" type="search" id="search" placeholder="" onChange={updateSearchData} />
-                <button onClick={() => startSearch()}>
+                <button onClick={() => startSearch()} id="search-btn">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
                         xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 512.005 512.005" 
@@ -62,14 +65,21 @@ function Header(props) {
             <div className={styles.categories}>
                 
                 <div>
-                    <select id="category" name="category">
+                    <select id="category" name="category" onChange={updateSearchData}>
                         <option>all</option>
+                        <option>art</option>
+                        <option>biography</option>
+                        <option>computers</option>
+                        <option>history</option>
+                        <option>medical</option>
+                        <option>poetry</option>
                     </select>
                 </div>
 
                 <div>
-                    <select id="sort" name="sort">
+                    <select id="sort" name="sort" onChange={updateSearchData}>
                         <option>relevance</option>
+                        <option>newest</option>
                     </select>
                 </div>
 
@@ -90,7 +100,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return {
         startLoading: () => dispatch(startFetchingBooks()),
-        search: (query) => dispatch(getBooks(query))
+        search: (query, sort, category) => dispatch(getBooks(query, sort, category))
     }
 }
 

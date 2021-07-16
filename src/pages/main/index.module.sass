@@ -1,3 +1,5 @@
+@import ../../styles/_vars
+
 .main
     display: flex
     justify-content: center
@@ -5,17 +7,25 @@
     flex-direction: column
     padding: 50px 0
 
+.mainContainer
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    margin-bottom: 20px
+
 .count
     margin-top: 50px
     font-size: 18px
     font-weight: 500
 
-.container
+.booksContainer
     display: flex
     justify-content: center
     align-items: center
     flex-wrap: wrap
     margin-top: 30px
+    margin-bottom: 60px
 
 .notification
     height: 60vh
@@ -24,3 +34,11 @@
     align-items: center
     font-size: 30px
     font-weight: 400
+
+.loadButton
+    padding: 15px 25px
+    color: #000
+    background-color: $accent
+    font-size: 22px
+    border-radius: 15px
+    cursor: pointer

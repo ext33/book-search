@@ -1,10 +1,10 @@
 const initialState = {
     books: {},
-    sort: null,
-    category: null,
-    categories: [],
+    sort: 'relevance',
+    category: 'all',
     error: false,
     loading: false,
+    loadingMore: false,
     query: null,
     lastElementIndex: 0
 }
@@ -23,11 +23,11 @@ export default function booksReducer(state = initialState, action){
         case 'BOOKS-FETCH':
             return {
                 books: action.books,
-                sort: null,
-                category: null,
-                categories: [],
+                sort: action.sort,
+                category: action.category,
                 error: false,
                 loading: false,
+                loadingMore: false,
                 query: action.query,
                 lastElementIndex: 30,
             }
@@ -39,46 +39,37 @@ export default function booksReducer(state = initialState, action){
                         ...state.books.items.concat(action.books.items)
                     ]
                 },
-                sort: null,
-                category: null,
-                categories: [],
+                sort: action.sort,
+                category: action.category,
                 error: false,
                 loading: false,
+                loadingMore: false,
                 query: action.query,
                 lastElementIndex: state.lastElementIndex += 30
             }
         case 'BOOKS-LOADING':
             return {
-                books: {},
-                sort: null,
-                category: null,
-                categories: [],
-                error: false,
+                ...state,
                 loading: true,
-                query: null,
-                lastElementIndex: 0
             }
-        case 'BOOKS-SORT':
+        case 'BOOKS-LOADING-MORE':
             return {
-
-            }
-        case 'BOOKS-CATEGORY':
-            return {
-
+                ...state,
+                loadingMore: true,
             }
         case 'BOOKS-ERROR':
             return {
                 books: {},
                 sort: null,
                 category: null,
-                categories: [],
                 error: true,
                 loading: false,
+                loadingMore: false,
                 query: null,
                 lastElementIndex: 0
             }
         case 'BOOKS-CLEAR':
-            return state
+            return initialState
         default:
             return state
     }
