@@ -41,11 +41,8 @@ function MainPage(props) {
                     })
 
                 if (book.volumeInfo.categories)
-                    book.volumeInfo.categories.forEach((category) => {
-                        return categories += category
-                    })
+                    categories = book.volumeInfo.categories[0]
                 
-
                 return (
                     <Card 
                         key={index}
@@ -54,8 +51,8 @@ function MainPage(props) {
                         title = {book.volumeInfo.title}
                         category = {categories}
                         authors = {authors}
-                        language = {book.volumeInfo.language ? book.volumeInfo.language : null}
-                        publishedDate = {book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate : null}
+                        language = {book.volumeInfo.language ? book.volumeInfo.language : ''}
+                        publishedDate = {book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate : ''}
                     />
                 )
             } else {
