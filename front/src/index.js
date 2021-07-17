@@ -11,7 +11,6 @@ import reduxThunk from 'redux-thunk';
 
 import rootReducer from './redux'
 
-
 // Create redux store
 const store = createStore(
   rootReducer, 

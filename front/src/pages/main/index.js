@@ -16,11 +16,19 @@ function MainPage(props) {
     }, [props])
 
     function loadMoreBooks(){
+        // ----------------------
+        // function for start loading more books
+        // ----------------------
+        
         props.startLoadMoreBooks()
         props.loadMoreBooks(props.query, props.sort, props.category, props.lastElementIndex)
     }
 
     function renderBooks() {
+        // ----------------------
+        // render book cards in conatiner
+        // ----------------------
+
         return props.books.items.map((book, index) => {
             if (book.volumeInfo){
 
@@ -58,6 +66,10 @@ function MainPage(props) {
     }
 
     function renderBooksBlock() {
+        // ----------------------
+        // function for render cards container
+        // ----------------------
+
         return (
             <div className={`${styles.mainContainer} animate__fadein`}>
                 

@@ -14,9 +14,14 @@ export default function booksReducer(state = initialState, action){
    // Reducer for books data
    // ----------------------
    // -FETCH: add to store fetched data
+   // -LOAD-MORE: load more books and add them to store
    // -LOADING: start loading while loading books data
+   // -LOADING-MORE: start loading more books
    // -ERROR: set error
    // -CLEAR: clear books store
+   // ----------------------
+   // state: previous state for this reducer, default set as initialState
+   // action: required action for reducer
    // ----------------------
    
     switch (action.type) {

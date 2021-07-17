@@ -1,0 +1,4 @@
+.gitignore
+.env
+front/node_modules/
+front-server/node_modules/

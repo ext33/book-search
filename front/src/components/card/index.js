@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './index.module.sass'
-import ModalBook from '../book'
+import ModalBook from '../modal'
 
 function Card(props) {
 
@@ -9,6 +9,10 @@ function Card(props) {
     useEffect(() => {}, [isShow])
 
     function toggleScrollLock(hide) {
+        // ----------------------
+        // function for disable scroll while modal is open
+        // ----------------------
+
         if (hide)
             document.querySelector('body').style = "overflow-y: hidden; -webkit-overflow-y: hidden;"
         else
@@ -16,18 +20,28 @@ function Card(props) {
     }
 
     function showModal() {
+        // ----------------------
+        // function for showing modal
+        // ----------------------
+
         setIsShow(() => {return true})
         toggleScrollLock(true)
-        
     }
 
     function closeModal() {
+        // ----------------------
+        // function for closing modal
+        // ----------------------
+        
         setIsShow(false)
         toggleScrollLock(false) 
     }
 
     function renderModal() {
-        console.log(1)
+        // ----------------------
+        // function for render modal in DOM
+        // ----------------------
+
         return (
             <ModalBook 
                 closeModal = {closeModal}
@@ -43,23 +57,23 @@ function Card(props) {
 
     return (
         <>
-        <div onClick={() => showModal()} className={styles.card}>
+            <div onClick={() => showModal()} className={styles.card}>
 
-            <img src={props.image} alt={props.title} />
+                <img src={props.image} alt={props.title} />
 
-            <div>
-                <p className={styles.category}>{props.category}</p>
-                <h2 className={styles.title}>{props.title}</h2>
-                <p className={styles.authors}>{props.authors}</p>
+                <div>
+                    <p className={styles.category}>{props.category}</p>
+                    <h2 className={styles.title}>{props.title}</h2>
+                    <p className={styles.authors}>{props.authors}</p>
+                </div>
+
             </div>
 
-        </div>
-
-        {
-            isShow ?
-                renderModal()
-            : null
-        }
+            {
+                isShow ?
+                    renderModal()
+                : null
+            }
         </>
     )
 }

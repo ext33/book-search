@@ -15,11 +15,18 @@ function Header(props) {
     })
 
     function handleEnterKey(e) {
+        // ----------------------
+        // handler for pressing enter while search input is focused
+        // ----------------------
+
         if (e.key === 'Enter')
             startSearch()
     }
     
     function updateSearchData(e) {
+        // ----------------------
+        // handler for updating seach data from inputs
+        // ----------------------
 
         document.getElementById('search').style = 'box-shadow: 0px 0px 20px 2px rgba(34, 60, 80, 0.2); border: none'
 
@@ -31,6 +38,9 @@ function Header(props) {
     }
 
     function startSearch() {
+        // ----------------------
+        // function for start search and check search input
+        // ----------------------
 
         if(searchData.query) {
             props.startLoading()
@@ -42,11 +52,11 @@ function Header(props) {
     }
 
     return (
-        <div className={styles.header} onKeyDown={handleEnterKey}>
+        <div className={styles.header}>
             
             <div className={styles.search}>
 
-                <input name="query" type="search" id="search" placeholder="" onChange={updateSearchData} />
+                <input name="query" type="search" id="search" placeholder="" onChange={updateSearchData}  onKeyDown={handleEnterKey} />
 
                 <button onClick={() => startSearch()} id="search-btn">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
