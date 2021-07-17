@@ -19,9 +19,10 @@ function MainPage(props) {
         // ----------------------
         // function for start loading more books
         // ----------------------
-        
+        if (!props.isLoadingMore){
         props.startLoadMoreBooks()
         props.loadMoreBooks(props.query, props.sort, props.category, props.lastElementIndex)
+        }
     }
 
     function renderBooks() {
