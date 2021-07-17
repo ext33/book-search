@@ -15,10 +15,15 @@ function MainPage(props) {
 
     }, [props])
 
+    function loadMoreBooks(){
+        props.startLoadMoreBooks()
+        props.loadMoreBooks(props.query, props.sort, props.category, props.lastElementIndex)
+    }
 
     function renderBooks() {
         return props.books.items.map((book, index) => {
             if (book.volumeInfo){
+
                 let authors = ''
                 let categories = ''
 
@@ -37,10 +42,12 @@ function MainPage(props) {
                     <Card 
                         key={index}
                         id = {book.id}
-                        image = {book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail: emptyBookImage}
+                        image = {book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : emptyBookImage}
                         title = {book.volumeInfo.title}
                         category = {categories}
                         authors = {authors}
+                        language = {book.volumeInfo.language ? book.volumeInfo.language : null}
+                        publishedDate = {book.volumeInfo.publishedDate ? book.volumeInfo.publishedDate : null}
                     />
                 )
             } else {
@@ -53,18 +60,19 @@ function MainPage(props) {
     function renderBooksBlock() {
         return (
             <div className={`${styles.mainContainer} animate__fadein`}>
+                
                 <div className={styles.count}>
                     Found { props.books.totalItems } books
                 </div>
+
                 <div className={styles.booksContainer}>
                     { renderBooks() }
                 </div>
-                <button className={styles.loadButton} onClick={() => {
-                    props.startLoadMoreBooks()
-                    props.loadMoreBooks(props.query, props.sort, props.category, props.lastElementIndex)
-                }}>
-                    { props.isLoading ? <Loading/> : <>Load more</>}
+
+                <button className={styles.loadButton} onClick={() => {loadMoreBooks()}}>
+                    { props.isLoadingMore ? <>. . .</> : <>Load more</>}
                 </button>
+
             </div>
         )
     }
@@ -75,12 +83,12 @@ function MainPage(props) {
             <Header />
 
             {
-                props.isLoading ? <Loading />
-                : props.error ? <Redirect to='/error' />
-                : props.books.items ? renderBooksBlock()
-                : <div className={`${styles.notification} animate__fadein`}>
+                props.isLoading ? <Loading /> : 
+                props.error ? <Redirect to='/error' /> : 
+                props.books.items ? renderBooksBlock() : 
+                <div className={`${styles.notification} animate__fadein`}>
                     No books found...
-                  </div>
+                </div>
             }
 
         </div>

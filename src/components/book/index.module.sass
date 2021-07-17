@@ -1,0 +1,73 @@
+.modal
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-wrap: nowrap
+    position: fixed
+    top: 0
+    z-index: 1
+    width: 100%
+    height: 100%
+    overflow-y: scroll
+    background-color: rgba(0,0,0,0.4)
+
+.modalContent
+    display: flex
+    justify-content: center
+    align-items: flex-end
+    flex-direction: column
+    margin-top: 90px
+
+    > button
+        background-color: #313131
+        color: #fff
+        padding: 7px 12px 8px 12px
+        margin-bottom: 5px
+        border: none
+        border-radius: 10px
+        cursor: pointer
+
+        > svg
+            height: 10px
+            width: 10px
+            fill: #fff
+
+    > div
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        width: 100%
+        background-color: #fff
+        padding: 10px 
+        border-radius: 15px
+
+        > img
+            width: 250px
+            height: 350px
+            background-size: cover
+            border-radius: 10px
+
+.info
+    display: flex
+    justify-content: center
+    align-items: flex-start
+    flex-direction: column
+
+    > div
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        margin: 10px 0
+
+        > div
+            margin-right: 8px
+            font-weight: 500
+
+        > p
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-wrap: wrap
+            white-space: wrap
+            max-width: 280px

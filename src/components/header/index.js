@@ -13,6 +13,11 @@ function Header(props) {
         sort: 'relevance',
         category: 'all',
     })
+
+    function handleEnterKey(e) {
+        if (e.key === 'Enter')
+            startSearch()
+    }
     
     function updateSearchData(e) {
 
@@ -23,8 +28,6 @@ function Header(props) {
             [e.target.name]: e.target.value,
         })
         
-        // if (e.target.name === 'sort' || e.target.name === 'category')
-            // startSearch()
     }
 
     function startSearch() {
@@ -39,11 +42,12 @@ function Header(props) {
     }
 
     return (
-        <div className={styles.header}>
+        <div className={styles.header} onKeyDown={handleEnterKey}>
             
             <div className={styles.search}>
 
                 <input name="query" type="search" id="search" placeholder="" onChange={updateSearchData} />
+
                 <button onClick={() => startSearch()} id="search-btn">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
                         xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -65,6 +69,7 @@ function Header(props) {
             <div className={styles.categories}>
                 
                 <div>
+
                     <select id="category" name="category" onChange={updateSearchData}>
                         <option>all</option>
                         <option>art</option>
@@ -74,13 +79,16 @@ function Header(props) {
                         <option>medical</option>
                         <option>poetry</option>
                     </select>
+
                 </div>
 
                 <div>
+
                     <select id="sort" name="sort" onChange={updateSearchData}>
                         <option>relevance</option>
                         <option>newest</option>
                     </select>
+
                 </div>
 
             </div>
